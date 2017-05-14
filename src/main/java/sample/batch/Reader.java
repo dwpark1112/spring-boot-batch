@@ -4,9 +4,9 @@ import org.springframework.batch.item.ItemReader;
 
 public class Reader implements ItemReader<String>{
 
-	private String[] messages = {"1. Hello world",
-		"2. World",
-		"3. Happy World"};
+	private String[] messages = {"Hello",
+		"World",
+		"Happy"};
 
 	private int count = 0;
 

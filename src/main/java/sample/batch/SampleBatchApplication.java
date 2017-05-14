@@ -22,11 +22,16 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.file.FlatFileItemWriter;
+import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.FileSystemResource;
+
+import sample.batch.model.TestResult;
 
 @SpringBootApplication
 @EnableBatchProcessing
@@ -41,7 +46,6 @@ public class SampleBatchApplication {
 	@Bean
 	public Job processJob(){
 		return jobs.get("processJob")
-			.incrementer(new RunIdIncrementer())
 			.listener(listener())
 			.flow(printMessageStep())
 			.end()
@@ -51,11 +55,24 @@ public class SampleBatchApplication {
 	@Bean
 	public Step printMessageStep(){
 		return steps.get("printMessasgeStep")
-			.<String, String> chunk(1)
+			.<String, TestResult> chunk(10)
 			.reader(new Reader())
 			.processor(new Processor())
-			.writer(new Writer())
+			.writer(writer())
 			.build();
+	}
+
+	@Bean
+	public FlatFileItemWriter<TestResult> writer() {
+		FlatFileItemWriter<TestResult> writer = new FlatFileItemWriter<>();
+		writer.setResource(new FileSystemResource("csv/student.csv"));
+		writer.setLineAggregator(new DelimitedLineAggregator<TestResult>() {{
+			setDelimiter("\t");
+			setFieldExtractor(new BeanWrapperFieldExtractor<TestResult>() {{
+				setNames(new String[] {"message", "dateTime", "randomName"});
+			}});
+		}});
+		return writer;
 	}
 
 	@Bean
