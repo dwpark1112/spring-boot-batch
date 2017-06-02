@@ -3,7 +3,6 @@
 - code from: <http://www.javainuse.com/spring/bootbatch>
 - spring batch tutorial with boot <http://walkingtechie.blogspot.kr/2017/03/spring-batch-with-spring-boot.html>
 
-<<<<<<< HEAD
 ## 기능적 요소
 
 - 배치작업의 재시도, 재시작, 건너뛰기 등의 정책을 설정 가능
