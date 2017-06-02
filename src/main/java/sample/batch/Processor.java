@@ -10,7 +10,7 @@ import sample.batch.model.TestResult;
 
 public class Processor implements ItemProcessor<String, TestResult>{
 
-	private String[] names = { "Roo", "Alpha", "Beta" };
+	private String[] names = { "Roo", "Alpha", "Beta?" };
 
 	@Override
 	public TestResult process(String s) throws Exception {
