@@ -26,6 +26,6 @@ public class JobInvokerController {
 
 		jobLauncher.run(processJob, jobParameters);
 
-		return "Batch job has been invoked...test dev";
+		return "Batch job has been invoked...";
 	}
 }
