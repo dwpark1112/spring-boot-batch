@@ -24,7 +24,7 @@
 - in memory jobrepository issue: <http://stackoverflow.com/questions/25077549/spring-batch-without-persisting-metadata-to-database>
 - spring-boot issue: <https://github.com/spring-projects/spring-boot/issues/3708>
 - spring batch jobrepository를 h2DB로 쓰는 방법: <https://groups.google.com/forum/#!topic/ksug/fG8OmyKrJCE>
-- <https://divinespear.blogspot.kr/2015/02/spring-boot-spring-batch.html>
+- default batch configurer: <https://divinespear.blogspot.kr/2015/02/spring-boot-spring-batch.html>
 
 >Spring-Batch needs a datasource that is registered under the name "dataSource" in the spring-context. If no spring-bean with that name is found, it creates its own. [http://stackoverflow.com/questions/37626682/spring-datasource-initialize-false-not-working]
 
